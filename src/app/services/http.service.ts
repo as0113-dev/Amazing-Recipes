@@ -10,7 +10,7 @@ export class HttpService {
     constructor(private http: HttpClient) { }
 
     baseUrl = environment.BASEURL;
-    httpHeaders = {
+    httpOptions = {
         headers: new HttpHeaders({
             'X-RapidAPI-Key': environment.API_KEY,
             'X-RapidAPI-Host': environment.HOST
@@ -18,7 +18,7 @@ export class HttpService {
     }
 
     getRecipesList() {
-        this.http.get(this.baseUrl + 'recipes/list?from=0&size=10&tags=under_30_minutes', this.httpHeaders).subscribe({
+        this.http.get(this.baseUrl + 'recipes/list?from=0&size=10&tags=under_30_minutes', this.httpOptions).subscribe({
             next: (resp) => {
                 console.log(resp);
 
