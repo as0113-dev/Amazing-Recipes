@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../services/http.service';
+import { RecipeItem } from '../models/recipe-item.interface';
+import { RecipeService } from '../services/recipe.service';
 
 @Component({
   selector: 'app-recipes',
@@ -8,12 +9,25 @@ import { HttpService } from '../services/http.service';
 })
 export class RecipesComponent implements OnInit {
 
-  constructor(private httpService: HttpService) { }
+  recipesList: RecipeItem[] = [];
+  constructor(private recipeService: RecipeService) { }
 
   ngOnInit(): void {
+    this.recipeService.recipesList.subscribe({
+      next: data=>{
+        console.log('data returned inside recipes-component: ', data);
+        
+        this.recipesList = data;
+      },
+      error: err=>{
+        console.log('ERROR inside recipes-component: ', err);
+        
+      }
+    });
   }
 
-  onGetRecipesList(){
-    this.httpService.getRecipesList();
+  setRecipesList(item: string) {
+    this.recipeService.getRecipesList(item);
   }
+
 }
