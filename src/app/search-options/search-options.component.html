@@ -1,0 +1,13 @@
+<form class="form-inline" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col offset-md-3">
+            <input type="text" placeholder="Search" class="form-control form-control-inline"
+                formControlName="searchBar">
+        </div>
+        <div class="col">
+            <button class="btn btn-primary" type="submit" [disabled]="searchForm.invalid">
+                Search Recipe
+            </button>
+        </div>
+    </div>
+</form>

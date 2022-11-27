@@ -2,7 +2,8 @@ import { environment } from "src/environments/environment";
 
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-
+import { IResponse1, IResponse2 } from "../models/recipe-item.interface";
+import { Observable } from "rxjs";
 @Injectable({
     providedIn: 'root'
 })
@@ -17,15 +18,10 @@ export class HttpService {
         })
     }
 
-    getRecipesList() {
-        this.http.get(this.baseUrl + 'recipes/list?from=0&size=10&tags=under_30_minutes', this.httpOptions).subscribe({
-            next: (resp) => {
-                console.log(resp);
-
-            },
-            error: (err) => {
-                console.log(err);
-            }
-        });
+    getRecipesList(item: string): Observable<IResponse1 | IResponse2>{
+        return this.http.get<IResponse1 | IResponse2>(
+            this.baseUrl +
+            `recipes/list?from=0&size=15&q=${item}`,
+            this.httpOptions);
     }
 }

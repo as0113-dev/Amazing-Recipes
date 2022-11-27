@@ -1,16 +1,18 @@
-<div class="container text-center">
-    <div class="row">
-        <div class="col-xs-12" style="word-wrap: break-word;">
-            <app-recipe-item></app-recipe-item>
+<div class="col-xs-12 list-group clearfix" style="word-wrap: break-word;">
+    <a class="list-group-item list-group-item-action" style="cursor: pointer;" (click)="onSelectedRecipe()">
+        <div class="float-start">
+            <h4>{{ recipeCopy.name || 'Title' }}</h4>
+            <!-- <p *ngIf="recipeCopy.description !== null">{{ recipeCopy.description !== undefined ? recipeCopy.description.substring(0, 50) + '...': 'Description Unavailble'}}</p> -->
+            <p>{{ recipeCopy.description }}</p>
+
+            <p>
+                <span class="badge bg-light text-dark" *ngFor="let tag of recipeCopy.tags">
+                    <small>{{tag.nameTag}} </small>
+                </span>
+            </p>
         </div>
-        <div class="col-xs-12" style="word-wrap: break-word;">
-            <app-recipe-item></app-recipe-item>
+        <div class="float-end">
+            <img src="{{ recipeCopy.imageURL }}" alt="" class="img-responsive" style="max-height: 50px;">
         </div>
-        <div class="col-xs-12" style="word-wrap: break-word;">
-            <app-recipe-item></app-recipe-item>
-        </div>
-        <div class="col-xs-12" style="word-wrap: break-word;">
-            <app-recipe-item></app-recipe-item>
-        </div>
-    </div>
+    </a>
 </div>

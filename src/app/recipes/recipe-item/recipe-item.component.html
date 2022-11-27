@@ -1,38 +1,35 @@
-<div class="row">
-
-    <div class="col">
-        <h3>Title</h3>
-        <img src="https://miro.medium.com/max/1200/1*FhefRHwEXt63Uo9RLTQf3w.jpeg" class="rounded" height="200px"
-            width="200px" alt="image here" />
-        <p>description</p>
+<div *ngIf="recipeItem !== undefined; else default">
+    <div class="row text-center">
+        <div class="col-xs-12">
+            <h3>{{ recipeItem.name }}</h3>
+            <img src={{recipeItem.imageURL}} class="img-thumbnail" style="max-width: 500px; max-height: 600px; "
+                alt="image here" />
+            <p>{{ recipeItem.description }}</p>
+        </div>
     </div>
-</div>
-<div class="row justify-content-center">
-    <!-- cooking instructions -->
-    <div class="col-md-auto">
-        <details>
-            <summary>Cooking Instructions</summary>
-            <div class="list-group">
-                <a class="list-group-item list-group-item-action">The curraskjflhaslkdnaslKDJHAsjdbasJKSNAjhmbent
-                    link item</a>
-                <a class="list-group-item list-group-item-action">A second link item</a>
-                <a class="list-group-item list-group-item-action">A third link item</a>
-                <a class="list-group-item list-group-item-action">A fourth link item</a>
-                <a class="list-group-item list-group-item-action">A disabled link item</a>
+    <hr><br>
+    <div class="row">
+        <!-- cooking instructions -->
+        <div class="col-xs-12">
+            <h3>Cooking Instructions</h3>
+            <div class="list-group" *ngFor="let ins of recipeItem.instructions">
+                <a class="list-group-item list-group-item-action">{{ ins }}</a>
             </div>
-        </details>
+        </div>
+    </div>
+    <hr><br>
+    <div class="row">
+        <!-- ingredients -->
+        <div class="col-xs-12">
+            <h3>Ingredients</h3>
+            <div class="list-group" *ngFor="let ingredient of recipeItem.ingredients">
+                <a class="list-group-item list-group-item-action">{{ ingredient.name }}, {{ ingredient.raw_text ==='n/a' ? '': ingredient.raw_text}} {{ingredient.extra_comment !== '' ? ', ' + ingredient.extra_comment : ''}}</a>
+            </div>
+        </div>
     </div>
 </div>
-<div class="row justify-content-md-center">
-    <!-- ingredients -->
-    <div class="col-md-auto">
-        <details>
-            <summary>Ingredients</summary>
-            <ul class="list-group list-group-horizontal">
-                <li class="list-group-item list-group-item-action">Name</li>
-                <li class="list-group-item list-group-item-action">quantity</li>
-                <li class="list-group-item list-group-item-action">units</li>
-            </ul>
-        </details>
+<ng-template #default>
+    <div class="col text-center">
+        <h2>Please select a recipe from the list.</h2>
     </div>
-</div>
+</ng-template>
